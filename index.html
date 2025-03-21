@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次尝试</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 固定导航栏 -->
+    <nav class="nav-menu">
+        <a href="#home">首页</a>
+        <a href="#about">关于</a>
+        <a href="#contact-footer">联系</a>
+    </nav>
+
+    <!-- 横幅区域 -->
+    <header class="banner" id="home">
+        <img src="images/banner.jpg" alt="网站横幅">
+        <h1>有朋~自远方来~，不亦乐乎</h1>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="content">
+        <section id="about" class="section-box">
+            <h2>关于我们</h2>
+            <p>这里写你的网站介绍内容...</p>
+            <div class="image-grid">
+                <img src="images/photo1.jpg" alt="图片1" loading="lazy">
+                <img src="images/photo2.jpg" alt="图片2" loading="lazy">
+            </div>
+        </section>
+    </main>
+
+    <!-- 整合后的页底 -->
+    <footer class="new-footer" id="contact-footer">
+        <div class="contact-footer">
+            <div class="contact-line">
+                <span class="icon">📧</span>
+                <span>邮箱：service@example.com</span>
+            </div>
+            <div class="contact-line">
+                <span class="icon">📱</span>
+                <span>电话：010-12345678</span>
+            </div>
+            <div class="contact-line">
+                <span class="icon">📍</span>
+                <span>地址：北京市朝阳区元宇宙大道404号</span>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025.3.21 我的个人网站 | 使用记事本搭配AI制作
+        </div>
+    </footer>
+
+    <!-- 交互脚本 -->
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const sections = document.querySelectorAll('section, footer');
+
+    // 防抖版激活函数
+    let isScrolling;
+    const activateNav = () => {
+        let current = '';
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
+                current = section.id;
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.hash === `#${current}`);
+        });
+    };
+
+    // 优化滚动监听
+    window.addEventListener('scroll', () => {
+        window.clearTimeout(isScrolling);
+        isScrolling = setTimeout(activateNav, 50);
+    }, { passive: true });
+
+    // 精准涟漪效果
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const scrollX = window.scrollX;
+            const scrollY = window.scrollY;
+            const size = Math.max(rect.width, rect.height);
+            
+            const ripple = document.createElement('div');
+            Object.assign(ripple.style, {
+                width: `${size}px`,
+                height: `${size}px`,
+                left: `${e.clientX + scrollX - rect.left - size/2}px`,
+                top: `${e.clientY + scrollY - rect.top - size/2}px`,
+                position: 'absolute'
+            });
+            
+            ripple.classList.add('ripple-effect');
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // 初始激活
+    activateNav();
+});
+</script>
+</body>
+</html>
