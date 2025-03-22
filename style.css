@@ -1,0 +1,274 @@
+:root {
+    --nav-height: 70px;
+    --gold-accent: #ffd700;
+    --section-spacing: 2rem;
+    --bg-light: #f5f5f5;
+    --text-dark: #2c3e50;
+}
+
+/* ========== 基础样式 ========== */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    background: var(--bg-light);
+    color: #333;
+    padding-top: var(--nav-height);
+}
+
+/* ========== 导航栏 ========== */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(40, 40, 40, 0.5);
+    backdrop-filter: saturate(180%) blur(6px);
+    -webkit-backdrop-filter: saturate(180%) blur(6px);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item {
+    color: rgba(255,255,255,0.95);
+    padding: 0.8rem 1.5rem;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-item.active {
+    color: var(--gold-accent) !important;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--gold-accent);
+    border-radius: 2px;
+    animation: underline 0.3s ease-out;
+}
+
+@keyframes underline {
+    from { width: 0; opacity: 0; }
+    to { width: 24px; opacity: 1; }
+}
+
+/* ========== 横幅区域 ========== */
+.banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-top: calc(var(--nav-height) * -1);
+    overflow: hidden;
+}
+
+.banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.banner h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    max-width: 90%;
+    z-index: 1;
+}
+
+/* ========== 内容区域 ========== */
+.content {
+    max-width: 1440px;
+    margin: 3rem auto;
+    padding: 0 var(--section-spacing);
+}
+
+.section-box {
+    background: white;
+    padding: 4rem 3rem;
+    margin: var(--section-spacing) 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    min-height: auto;
+    opacity: 0;
+    animation: cardEntrance 0.6s ease forwards;
+}
+
+@keyframes cardEntrance {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backface-visibility: hidden;
+}
+
+.image-grid img:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* ========== 修复后的页脚 ========== */
+.new-footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem var(--section-spacing) 1rem;
+    margin-top: 4rem;
+    clip-path: polygon(0 2rem, 100% 0, 100% 100%, 0 100%);
+    position: relative;
+    z-index: 2;
+}
+
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.contact-item {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.contact-item a {
+    color: var(--gold-accent);
+    text-decoration: none;
+}
+
+.copyright-info {
+    text-align: center;
+    padding-top: 2rem;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* ========== 交互效果 ========== */
+.ripple-effect {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    from { transform: scale(0); opacity: 1; }
+    to { transform: scale(2); opacity: 0; }
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 1rem;
+    }
+
+    .nav-menu {
+        height: 60px;
+        backdrop-filter: none;
+    }
+
+    .nav-item {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+
+    .section-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .image-grid img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        justify-content: space-around;
+    }
+
+    .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    .banner {
+        aspect-ratio: 9/16; /* 竖屏适配 */
+    }
+
+    .contact-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ========== 深色模式 ========== */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+        color: #eee;
+    }
+    .section-box {
+        background: #2d2d2d;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    }
+    .music-button {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 背景音乐按钮样式 */
+.music-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.music-button:hover {
+    background: rgba(255, 215, 0, 0.9);
+}

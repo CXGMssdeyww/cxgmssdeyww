@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="欢迎访问我的个人网站 - 展示与交流平台">
+    <meta property="og:image" content="https://yourdomain.com/images/banner.jpg">
+    <title>有朋自远方来 | 我的网站</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+
+<body>
+    <!-- 固定导航栏 -->
+    <nav class="nav-menu" aria-label="主导航">
+        <a href="#home" class="nav-item">🏠 首页</a>
+        <a href="#about" class="nav-item">📖 关于</a>
+        <a href="#contact" class="nav-item">📞 联系</a>
+    </nav>
+
+    <!-- 背景音乐播放器 -->
+    <audio id="bg-music" loop>
+        <source src="music/background.mp3" type="audio/mp3">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <!-- 背景音乐开关按钮 -->
+    <button id="music-toggle" class="music-button" aria-label="切换背景音乐">🎵</button>
+
+    <style>
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .music-button.rotate {
+      animation: rotate 2s linear infinite;
+      background: rgba(255, 215, 0, 0.9) !important;
+    }
+    </style>
+
+    <!-- 横幅视频区域 -->
+    <header class="banner" id="home">
+        <video class="banner-video" autoplay muted loop playsinline>
+            <source src="videos/banner.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+        <h1>有朋~自远方来~，不亦乐乎</h1>
+    </header>
+
+    <!-- 主要内容区块 -->
+    <main class="content">
+        <article id="about" class="section-box">
+            <h2>关于我们</h2>
+            <p>这里写你的网站介绍内容...</p>
+            <div class="image-grid">
+                <figure class="gallery-item">
+                    <img src="images/photo1.jpg" alt="团队工作场景" loading="lazy" width="400" height="300">
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo2.jpg" alt="项目成果展示" loading="lazy" width="400" height="300">
+                </figure>
+            </div>
+        </article>
+    </main>
+
+    <!-- 修复后的页脚 -->
+    <footer class="new-footer" id="contact">
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="icon" aria-hidden="true">📧</span>
+                <span>邮箱：<a href="mailto:service@example.com">service@example.com</a></span>
+            </div>
+            <div class="contact-item">
+                <span class="icon" aria-hidden="true">📱</span>
+                <span>电话：<a href="tel:010-12345678">010-12345678</a></span>
+            </div>
+            <div class="contact-item">
+                <span class="icon" aria-hidden="true">📍</span>
+                <address>地址：北京市朝阳区元宇宙大道404号</address>
+            </div>
+        </div>
+        
+        <div class="copyright-info">
+            © 2025.3.21 我的个人网站 | 使用记事本搭配AI制作
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "你的姓名",
+        "url": "https://yourdomain.com",
+        "email": "service@example.com",
+        "image": "https://yourdomain.com/images/avatar.jpg"
+    }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
